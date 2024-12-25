@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Insurance Dashboard</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/common.js"></script>
+    <script src="Scripts/webservicedriver.js"></script>
+    <script src="Scripts/webserviceclaim.js"></script>
+    <script src="Scripts/webservicecar.js"></script>
+    <link href="Content/style.css" rel="stylesheet" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/Site.css" rel="stylesheet" />
+    <script src="Scripts/modernizr-2.6.2.js"></script>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Car Insurance Dashboard</a>
+                <a href="graph.html" class="btn btn-graphs">View Graphs</a>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        body, html {
+            overflow-x: hidden;  /* Prevents horizontal scroll */
+        }
+    </style>    
+     <!-- Modal -->
+    <div class="container body-content">
+
+        <div id = "createDriverModal" class = "modal">
+            <!-- Model Content -->
+            <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2 style="text-align: center;">Add Driver Form</h2>
+                    <form class="form-horizontal" role = "form" >
+                    <div class="form-group"><label for="driver_id" class="col-md-3 control-label">Driver Id</label><div class="col-md-9"><input type="text" class="form-control" id="driver_id"></div></div>
+                    <div class="form-group"><label for="kidsdriv" class="col-md-3 control-label">Kids Driven</label><div class="col-md-9"><input type="text" class="form-control" id="kidsdriv"></div></div>
+                    <div class="form-group"><label for="age" class="col-md-3 control-label">Age</label><div class="col-md-9"><input type="text" class="form-control" id="age"></div></div>
+                    <div class="form-group"><label for="income" class="col-md-3 control-label">Income</label><div class="col-md-9"><input type="text" class="form-control" id="income"></div></div>
+                    <div class="form-group"><label for="mstatus" class="col-md-3 control-label">Marital Status</label><div class="col-md-9"><input type="text" class="form-control" id="mstatus"></div></div>
+                    <div class="form-group"><label for="gender" class="col-md-3 control-label">Gender</label><div class="col-md-9"><input type="text" class="form-control" id="gender"></div></div>
+                    <div class="form-group"><label for="education" class="col-md-3 control-label">Education</label><div class="col-md-9"><input type="text" class="form-control" id="education"></div></div>
+                    <div class="form-group"><label for="occupation" class="col-md-3 control-label">Occupation</label><div class="col-md-9"><input type="text" class="form-control" id="occupation"></div></div>
+                    <div class="form-group"><div class="col-md-offset-3 col-md-9"><input type="button" value="Add Driver" class="btn btn-sm btn-primary" onclick="addDriver();" />&nbsp;</div></div>
+                    </form>
+            </div>
+        </div>
+
+        <div id = "editDriverModal" class = "modal">
+        <!-- Model Content -->
+            <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2 style="text-align: center;">Edit Driver Form</h2>
+                    <form class="form-horizontal" role = "form" >
+                    <div class="form-group"><label for="driverkidsdriv" class="col-md-3 control-label">Kids Driven</label><div class="col-md-9"><input type="text" class="form-control" id="driverkidsdriv"></div></div>
+                    <div class="form-group"><label for="driverage" class="col-md-3 control-label">Age</label><div class="col-md-9"><input type="text" class="form-control" id="driverage"></div></div>
+                    <div class="form-group"><label for="driverincome" class="col-md-3 control-label">Income</label><div class="col-md-9"><input type="text" class="form-control" id="driverincome"></div></div>
+                    <div class="form-group"><label for="drivermstatus" class="col-md-3 control-label">Martial Status</label><div class="col-md-9"><input type="text" class="form-control" id="drivermstatus"></div></div>
+                    <div class="form-group"><label for="drivergender" class="col-md-3 control-label">Gender</label><div class="col-md-9"><input type="text" class="form-control" id="drivergender"></div></div>
+                    <div class="form-group"><label for="drivereducation" class="col-md-3 control-label">Education</label><div class="col-md-9"><input type="text" class="form-control" id="drivereducation"></div></div>
+                    <div class="form-group"><label for="driveroccupation" class="col-md-3 control-label">Occupation</label><div class="col-md-9"><input type="text" class="form-control" id="driveroccupation"></div></div>
+                    <span class="edit"><input type="button" value="Edit Driver"/>                        
+                    </form>
+            </div> 
+        </div>
+
+        <div id = "createClaimModal" class = "modal">
+            <!-- Model Content -->
+            <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2 style="text-align: center;">Add Claim Form</h2>
+                    <form class="form-horizontal" role = "form" >
+                    <div class="form-group"><label for="id" class="col-md-3 control-label">Id</label><div class="col-md-9"><input type="text" class="form-control" id="id"></div></div>
+                    <div class="form-group"><label for="claim_flag" class="col-md-3 control-label">Claim Flag</label><div class="col-md-9"><input type="text" class="form-control" id="claim_flag"></div></div>
+                    <div class="form-group"><label for="clm_amt" class="col-md-3 control-label">Claim AMT</label><div class="col-md-9"><input type="text" class="form-control" id="clm_amt"></div></div>
+                    <div class="form-group"><label for="clm_freq" class="col-md-3 control-label">Claim Freq</label><div class="col-md-9"><input type="text" class="form-control" id="clm_freq"></div></div>
+                    <div class="form-group"><label for="oldclaim" class="col-md-3 control-label">Old Claim</label><div class="col-md-9"><input type="text" class="form-control" id="oldclaim"></div></div>
+                    <div class="form-group"><label for="claim_driver_id" class="col-md-3 control-label">Driver ID</label><div class="col-md-9"><input type="text" class="form-control" id="claim_driver_id"></div></div>
+                    <div class="form-group"><div class="col-md-offset-3 col-md-9"><input type="button" value="Add Claim" class="btn btn-sm btn-primary" onclick="addClaim();" />&nbsp;</div></div>
+                    </form>
+            </div>
+        </div>
+
+        <div id = "editClaimModal" class = "modal">
+            <!-- Model Content -->
+            <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2 style="text-align: center;">Edit Claim Form</h2>
+                    <form class="form-horizontal" role = "form" >
+                    <div class="form-group"><label for="claimclaim_flag" class="col-md-3 control-label">Claim Flag</label><div class="col-md-9"><input type="text" class="form-control" id="claimclaim_flag"></div></div>
+                    <div class="form-group"><label for="claimclm_amt" class="col-md-3 control-label">Claim AMT</label><div class="col-md-9"><input type="text" class="form-control" id="claimclm_amt"></div></div>
+                    <div class="form-group"><label for="claimclm_freq" class="col-md-3 control-label">Claim Freq</label><div class="col-md-9"><input type="text" class="form-control" id="claimclm_freq"></div></div>
+                    <div class="form-group"><label for="claimoldclaim" class="col-md-3 control-label">Old Claim</label><div class="col-md-9"><input type="text" class="form-control" id="claimoldclaim"></div></div>
+                    <div class="form-group"><label for="clm_driver_id" class="col-md-3 control-label">Driver ID</label><div class="col-md-9"><input type="text" class="form-control" id="clm_driver_id"></div></div>
+                    <span class="edit"><input type="button" value="Edit Claim"/>                        
+                    </form>
+            </div> 
+        </div>
+
+        <div id = "createCarModal" class = "modal">
+            <!-- Model Content -->
+            <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2 style="text-align: center;">Add Car Form</h2>
+                    <form class="form-horizontal" role = "form" >
+                    <div class="form-group"><label for="id" class="col-md-3 control-label">Id</label><div class="col-md-9"><input type="text" class="form-control" id="id"></div></div>
+                    <div class="form-group"><label for="car_type" class="col-md-3 control-label">Car Type</label><div class="col-md-9"><input type="text" class="form-control" id="car_type"></div></div>
+                    <div class="form-group"><label for="red_car" class="col-md-3 control-label">Red Car</label><div class="col-md-9"><input type="text" class="form-control" id="red_car"></div></div>
+                    <div class="form-group"><label for="car_age" class="col-md-3 control-label">Car Age</label><div class="col-md-9"><input type="text" class="form-control" id="car_age"></div></div>
+                    <div class="form-group"><label for="car_driver_id" class="col-md-3 control-label">Driver Id</label><div class="col-md-9"><input type="text" class="form-control" id="car_driver_id"></div></div>
+                    <div class="form-group"><div class="col-md-offset-3 col-md-9"><input type="button" value="Add Car" class="btn btn-sm btn-primary" onclick="addCar();" />&nbsp;</div></div>
+                    </form>
+            </div>
+        </div>
+
+        <div id = "editCarModal" class = "modal">
+            <!-- Model Content -->
+            <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2 style="text-align: center;">Edit Car Form</h2>
+                    <form class="form-horizontal" role = "form" >
+                    <div class="form-group"><label for="carcar_type" class="col-md-3 control-label">Car Type</label><div class="col-md-9"><input type="text" class="form-control" id="carcar_type"></div></div>
+                    <div class="form-group"><label for="carred_car" class="col-md-3 control-label">Red Car</label><div class="col-md-9"><input type="text" class="form-control" id="carred_car"></div></div>
+                    <div class="form-group"><label for="carcar_age" class="col-md-3 control-label">Car Age</label><div class="col-md-9"><input type="text" class="form-control" id="carcar_age"></div></div>
+                    <div class="form-group"><label for="cr_driver_id" class="col-md-3 control-label">Driver Id</label><div class="col-md-9"><input type="text" class="form-control" id="cr_driver_id"></div></div>
+                    <span class="edit"><input type="button" value="Edit Car"/>                        
+                    </form>
+            </div> 
+        </div>
+
+    <div id="info-box" class="info-box">
+        <h3>Dashboard Help</h3>
+        <p><strong>Driver Profiles:</strong> This table has the functionality to view all drivers, add new drivers and to update/edit and delete existing driver information after the required table is genrated through the buttons. </p>
+        <p><strong>Claim Detials:</strong> This table has the functionality to view all claims, add new claims and to update/edit and delete existing claim information after the required table is genrated through the buttons.</p>
+        <p><strong>Car Details:</strong> This table has the functionality to view all cars, add new cars and to update/edit and delete existing car information after the required table is genrated through the buttons.</p>
+    </div>
+        
+    <script>
+        function hideInfoBox() {
+            const infoBox = document.getElementById('info-box');
+            if (infoBox) {
+                infoBox.style.display = 'none';
+            }
+        }
+    </script>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            &nbsp;
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Driver Profiles</h2>
+            <hr>
+            <input type="button" value="Get All Drivers" class="btn btn-sm btn-primary" onclick="getAllDrivers(); hideInfoBox();" />
+            &nbsp;
+            <input type="button" value="Add New Driver" class="btn btn-sm btn-primary" onclick="createNewDriverForm(); hideInfoBox();" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Claim Details</h2>
+            <hr>
+            <input type="button" value="Get All Claims" class="btn btn-sm btn-primary" onclick="getAllClaims(); hideInfoBox();" />
+            &nbsp;
+            <input type="button" value="Add New Claims" class="btn btn-sm btn-primary" onclick="createNewClaimForm(); hideInfoBox();" />
+        </div> 
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Car Details</h2>
+            <hr>
+            <input type="button" value="Get All Cars" class="btn btn-sm btn-primary" onclick="getAllCars(); hideInfoBox();" />
+            &nbsp;
+            <input type="button" value="Add New Car" class="btn btn-sm btn-primary" onclick="createNewCarForm(); hideInfoBox();" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            &nbsp;
+        </div>
+        </div>
+        <div id="alldrivers" class="row">
+        </div>
+        <div id="newdriverform" class="row">
+        </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            &nbsp;
+        </div>
+        </div>
+        <div id="allclaims" class="row">
+        </div>
+        <div id="newclaimform" class="row">
+        </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            &nbsp;
+        </div>
+        </div>
+        <div id="allcars" class="row">
+        </div>
+        <div id="newcarform" class="row">
+        </div>
+        <footer>
+            <p>&copy; 2024 - University of Derby</p>
+        </footer>
+    </div>
+</body>
+</html>                                           

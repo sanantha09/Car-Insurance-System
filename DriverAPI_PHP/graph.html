@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Insurance Dashboard</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/common.js"></script>
+    <script src="Scripts/webservicedriver.js"></script>
+    <script src="Scripts/webserviceclaim.js"></script>
+    <script src="Scripts/webservicecar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="http://cdn.jsdelivr.net/npm/charts-plugin-zoom"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="Scripts/graph.js"></script>
+    <link href="Content/style.css" rel="stylesheet" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/Site.css" rel="stylesheet" />
+    <script src="Scripts/modernizr-2.6.2.js"></script>
+
+</head>
+<body>
+    <body style="background-color: #e0f7fa;">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Car Insurance Dashboard</a>
+                <a href="graph.html" class="btn btn-graphs">View Graphs</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-md-12">
+                &nbsp;
+            </div>
+        </div>
+
+        <header>
+            <h2>Drivers Graph Section</h2>
+        </header>
+
+        <section id="driverGraphSection">
+            <div class="col-md-4">
+                <canvas id="driverAgeBarChart" width="400" height="400"></canvas>
+            </div>
+            <div class="col-md-4">
+                <canvas id="driverGenderPieChart" width="400" height="400"></canvas>
+                <div id="genderCountDisplay">
+                    <p id="maleCount">Males: 0</p>
+                    <p id="femaleCount">Females: 0</p>
+                </div>      
+            </div>
+            <div class="col-md-4">
+                <canvas id="maritalStatusRadarChart" width="400" height="400"></canvas>      
+            </div>
+        </section>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-12">
+                &nbsp;
+            </div>
+        </div>
+
+        <header>
+            <h2>Claims Graph Section</h2>
+        </header>
+
+        <section id="claimsGraphSection">
+            <div class="col-md-4">
+               <!-- <div class="chart-container">-->
+                <button id="addLineOfBestFit">Add Line of Best Fit</button>
+            </div>
+            <div class="col-md-4">
+                <canvas id="driverClaimsScatterChart" width="400" height="400"></canvas>
+            </div>
+        </section>
+
+        <hr>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-12">
+            &nbsp;
+        </div>
+    </div>
+
+    <header>
+        <h2>Cars Graph Section</h2>
+    </header>
+
+    <section id="carssGraphSection">
+        <div class="col-md-6">
+            <canvas id="carTypePolarChart" width="400" height="400"></canvas>      
+        </div>
+        <div class="col-md-6">
+            <div class="visualization-explanation fancy-info-box">
+                <h3>Visualisation Descriptions</h3>
+                <ul>
+                    <li><strong>Bar Chart:</strong> Shows the distribution of driver ages. Each bar represents an age group with the height indicating the number of drivers.</li>
+                    <li><strong>Pie Chart:</strong> Displays the gender distribution of drivers. Each slice represents a gender proportion.</li>
+                    <li><strong>Radar Chart:</strong> Used for showing the marital status distribution by gender in a circular form, comparing multiple quantitative variables.</li>
+                    <li><strong>Scatter Chart:</strong> Plots each claim by age of the driver, showcasing patterns or correlations between age and number of claims. </li>
+                    <li><strong>Polar Area Chart:</strong> Represents types of cars in a circular format, ideal for comparing statistical data across categories.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        window.onload = function() {
+            fetchDriversAndRenderChart();
+            fetchDataAndRenderScatterChart();
+            fetchCarTypesAndRenderPolarChart();
+        };
+
+    </script>
+        
+
+</body>
+</html>                         
+
